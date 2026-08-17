@@ -28,3 +28,23 @@ The objective of ShellForge is to develop a Linux command interpreter that demon
 
 ```bash
 make
+
+## Week 2 Features
+
+- Dynamic command input
+- Memory allocation using malloc()
+- Automatic buffer expansion using realloc()
+- Proper memory cleanup using free()
+
+## Week 2 Testing
+
+ShellForge was tested with long commands exceeding the initial buffer size.
+
+Memory management was verified using Valgrind.
+
+Result:
+
+- 0 bytes in use at exit
+- All heap blocks were freed
+- 0 memory errors
+- No memory leaks detected
