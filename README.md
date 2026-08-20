@@ -24,11 +24,6 @@ The objective of ShellForge is to develop a Linux command interpreter that demon
 - Git
 - Linux System Calls
 
-## Build
-
-```bash
-make
-
 ## Week 2 Features
 
 - Dynamic command input
