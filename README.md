@@ -43,3 +43,11 @@ Result:
 - All heap blocks were freed
 - 0 memory errors
 - No memory leaks detected
+
+
+## Week 3 Features
+
+- Command parsing using strtok()
+- Dynamic argv[] construction
+- Modular parser implementation
+- Ready for process execution with execvp()
