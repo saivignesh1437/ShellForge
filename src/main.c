@@ -4,13 +4,16 @@
 
 #include "../include/shell.h"
 #include "../include/input.h"
+#include "../include/parser.h"
 
 int main()
 {
     char *line;
+    char **tokens;
+    int i;
 
     printf("=====================================\n");
-    printf(" Welcome to %s Version %s\n", SHELL_NAME, VERSION);
+    printf("ShellForge Version 3.0\n");
     printf("=====================================\n");
 
     while (1)
@@ -21,16 +24,20 @@ int main()
 
         if (strcmp(line, "exit") == 0)
         {
-            printf("Exiting ShellForge...\n");
             free(line);
             break;
         }
 
-        if (strlen(line) != 0)
+        tokens = parse_line(line);
+
+        printf("\nParsed Tokens\n");
+
+        for (i = 0; tokens[i] != NULL; i++)
         {
-            printf("You entered: %s\n", line);
+            printf("argv[%d] = %s\n", i, tokens[i]);
         }
 
+        free_tokens(tokens);
         free(line);
     }
 
