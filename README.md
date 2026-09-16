@@ -59,3 +59,12 @@ Result:
 - Command execution using execvp()
 - Parent-child synchronization using waitpid()
 - Error handling using perror()
+
+
+## Week 5 Features
+
+- Built-in commands: cd, pwd, help, clear, exit
+- Environment variable support using getenv()
+- env command to display environment variables
+- Built-in commands execute directly inside the shell
+- External commands continue to use fork(), execvp(), and waitpid()
