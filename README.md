@@ -1,61 +1,55 @@
 # ShellForge
 
-ShellForge is a Unix-like Linux command interpreter developed as part of the Operating Systems and System Programming (OSSP) Project-Based Learning course.
+A simple Unix-like shell developed in C as part of the Operating Systems and System Programming project.
 
-## Project Objective
+## Project Progress
 
-The objective of ShellForge is to develop a Linux command interpreter that demonstrates Operating System and System Programming concepts using C and Linux system calls.
+### Week 1 – REPL
+- Interactive command prompt
+- Basic input handling
+- Exit command
 
-## Week 1 Features
+### Week 2 – Dynamic Memory
+- Dynamic input buffer using malloc()
+- Buffer expansion using realloc()
+- Memory cleanup using free()
 
-- Interactive REPL loop
-- Linux development environment
-- C compilation using GCC
-- Makefile-based build
-- Git repository
-- GitHub repository
-
-## Technologies
-
-- C
-- Ubuntu Linux
-- GCC
-- Make
-- Git
-- Linux System Calls
-
-## Week 2 Features
-
-- Dynamic command input
-- Memory allocation using malloc()
-- Automatic buffer expansion using realloc()
-- Proper memory cleanup using free()
-
-## Week 2 Testing
-
-ShellForge was tested with long commands exceeding the initial buffer size.
-
-Memory management was verified using Valgrind.
-
-Result:
-
-- 0 bytes in use at exit
-- All heap blocks were freed
-- 0 memory errors
-- No memory leaks detected
-
-
-## Week 3 Features
-
+### Week 3 – Command Parser
 - Command parsing using strtok()
-- Dynamic argv[] construction
-- Modular parser implementation
-- Ready for process execution with execvp()
+- Dynamic argv[] creation
+- NULL-terminated token array
+- Parser modularization
 
-
-## Week 4 Features
-
+### Week 4 – Process Execution
 - Process creation using fork()
 - Command execution using execvp()
 - Parent-child synchronization using waitpid()
 - Error handling using perror()
+
+### Week 5 – Built-in Commands
+- Built-in commands: cd, pwd, help, clear, exit
+- Environment variable support using getenv()
+- env command
+- Built-in commands execute directly inside the shell
+- External commands continue to use fork(), execvp(), and waitpid()
+
+## Project Structure
+
+```text
+ShellForge/
+├── include/
+│   ├── builtin.h
+│   ├── input.h
+│   ├── parser.h
+│   ├── process.h
+│   └── shell.h
+├── src/
+│   ├── builtin.c
+│   ├── input.c
+│   ├── main.c
+│   ├── parser.c
+│   └── process.c
+├── data/
+├── Makefile
+├── README.md
+└── .gitignore
