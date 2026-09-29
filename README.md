@@ -76,18 +76,22 @@ ShellForge/
 ├── README.md
 ├── Makefile
 ├── bin/
+│   └── shellforge
+│
 ├── include/
 │   ├── shell.h
 │   ├── input.h
 │   ├── parser.h
 │   ├── process.h
 │   ├── builtin.h
-│   └── signals.h
+│   ├── signals.h
+│   └── pipes.h
+│
 └── src/
     ├── main.c
-
     ├── input.c
     ├── parser.c
     ├── process.c
     ├── builtin.c
-    └── signals.c
+    ├── signals.c
+    └── pipes.c
