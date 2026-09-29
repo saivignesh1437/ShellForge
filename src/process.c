@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <errno.h>
 
 int execute(char **tokens)
 {
@@ -12,24 +13,66 @@ int execute(char **tokens)
 
     if (pid == 0)
     {
+        /*
+         * Child process
+         */
         if (execvp(tokens[0], tokens) == -1)
         {
             perror("ShellForge");
+            exit(EXIT_FAILURE);
         }
-
-        exit(EXIT_FAILURE);
     }
     else if (pid < 0)
     {
-        perror("fork");
+        /*
+         * fork() failed
+         */
+        perror("ShellForge");
+        return 1;
     }
     else
     {
-        do
+        /*
+         * Parent process
+         *
+         * Wait for the foreground child.
+         * The SIGCHLD handler may have already
+         * collected the child, so handle ECHILD.
+         */
+        while (1)
         {
-            waitpid(pid, &status, WUNTRACED);
+            pid_t result = waitpid(pid, &status, WUNTRACED);
+
+            if (result == pid)
+            {
+                /*
+                 * Child was successfully collected.
+                 */
+                if (WIFEXITED(status) || WIFSIGNALED(status))
+                {
+                    break;
+                }
+            }
+            else if (result == -1)
+            {
+                /*
+                 * SIGCHLD handler may have already
+                 * reaped the child.
+                 */
+                if (errno == EINTR)
+                {
+                    continue;
+                }
+
+                if (errno == ECHILD)
+                {
+                    break;
+                }
+
+                perror("waitpid");
+                break;
+            }
         }
-        while (!WIFEXITED(status) && !WIFSIGNALED(status));
     }
 
     return 1;
