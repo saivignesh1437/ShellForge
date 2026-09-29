@@ -8,6 +8,7 @@
 #include "../include/process.h"
 #include "../include/builtin.h"
 #include "../include/signals.h"
+#include "../include/pipes.h"
 
 int main()
 {
@@ -54,19 +55,59 @@ int main()
          */
         if (tokens[0] != NULL)
         {
+            int pipe_index = -1;
+
             /*
-             * First check for built-in commands.
-             *
-             * execute_builtin() returns:
-             * 0 -> command was a built-in
-             * non-zero -> command is not a built-in
+             * Search for pipe symbol '|'
              */
-            if (execute_builtin(tokens) != 0)
+            for (int i = 0; tokens[i] != NULL; i++)
+            {
+                if (strcmp(tokens[i], "|") == 0)
+                {
+                    pipe_index = i;
+                    break;
+                }
+            }
+
+            /*
+             * Week 7:
+             * Two-command pipeline
+             */
+            if (pipe_index != -1)
+            {
+                char **cmd1 = tokens;
+                char **cmd2 = &tokens[pipe_index + 1];
+
+                /*
+                 * Separate the two commands
+                 */
+                tokens[pipe_index] = NULL;
+
+                /*
+                 * Make sure both commands exist
+                 */
+                if (cmd1[0] != NULL && cmd2[0] != NULL)
+                {
+                    execute_pipe(cmd1, cmd2);
+                }
+                else
+                {
+                    printf("ShellForge: invalid pipe command\n");
+                }
+            }
+            else
             {
                 /*
-                 * Execute external command
+                 * No pipe.
+                 * First check for built-in commands.
                  */
-                execute(tokens);
+                if (execute_builtin(tokens) != 0)
+                {
+                    /*
+                     * Execute external command
+                     */
+                    execute(tokens);
+                }
             }
         }
 

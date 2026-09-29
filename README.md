@@ -50,6 +50,25 @@ A simple Unix-like shell developed in C as part of the Operating Systems and Sys
 - Checked for zombie processes using ps -el
 - No zombie processes were found
 
+
+## Week 7 Features
+
+- Anonymous pipe support using pipe()
+- Output redirection using dup2()
+- Input redirection using dup2()
+- Two-command pipelines
+- Parent process waits for both child processes
+- Pipe file descriptors are properly closed
+- Inter-process communication using POSIX pipes
+
+## Week 7 Testing
+
+- Tested `ls src | grep .c`
+- Tested `echo hello | wc -w`
+- Verified successful communication between two processes
+- Verified pipeline execution using pipe() and dup2()
+
+
 ## Project Structure
 
 ```text
@@ -66,6 +85,7 @@ ShellForge/
 │   └── signals.h
 └── src/
     ├── main.c
+
     ├── input.c
     ├── parser.c
     ├── process.c
