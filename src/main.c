@@ -101,7 +101,7 @@ int main()
                  * No pipe.
                  * First check for built-in commands.
                  */
-                if (execute_builtin(tokens) != 0)
+                if (execute_builtin(tokens) == 0)
                 {
                     /*
                      * Execute external command

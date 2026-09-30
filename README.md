@@ -68,15 +68,29 @@ A simple Unix-like shell developed in C as part of the Operating Systems and Sys
 - Verified successful communication between two processes
 - Verified pipeline execution using pipe() and dup2()
 
+## Week 8 Features
+- Memory leak detection using Valgrind
+- Debugging using GDB
+- AddressSanitizer support
+- Defensive programming practices
+- Improved error handling
+- Verified memory management with Valgrind
+
+### Week 8 Testing
+
+Valgrind testing was performed using:
+
+```bash
+make clean
+make
+valgrind --leak-check=full ./bin/shellforge
 
 ## Project Structure
 
 ```text
 ShellForge/
-├── README.md
 ├── Makefile
-├── bin/
-│   └── shellforge
+├── README.md
 │
 ├── include/
 │   ├── shell.h
@@ -87,11 +101,14 @@ ShellForge/
 │   ├── signals.h
 │   └── pipes.h
 │
-└── src/
-    ├── main.c
-    ├── input.c
-    ├── parser.c
-    ├── process.c
-    ├── builtin.c
-    ├── signals.c
-    └── pipes.c
+├── src/
+│   ├── main.c
+│   ├── input.c
+│   ├── parser.c
+│   ├── process.c
+│   ├── builtin.c
+│   ├── signals.c
+│   └── pipes.c
+│
+└── bin/
+    └── shellforge
